@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Página de Inicio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-center p-6">
+<div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
+    <h2 class="text-2xl font-bold mb-4">Bienvenido, <span sec:authentication="name"></span>!</h2>
+    <p class="mb-4 text-gray-700">Rol: <span sec:authentication="principal.authorities"></span></p>
+
+    <div class="space-y-2">
+        <a th:href="@{/transferencia}"
+           class="block bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">Realizar transferencia</a>
+
+        <div sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin/transferencias}"
+               class="block bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition">Ver transferencias</a>
+            <a th:href="@{/admin/ganancias}"
+               class="block bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition">Ver ganancias</a>
+        </div>
+    </div>
+
+    <form th:action="@{/logout}" method="post" class="mt-6">
+        <button type="submit"
+                class="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition">
+            Cerrar sesión
+        </button>
+    </form>
+</div>
+</body>
+</html>

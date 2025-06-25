@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ganancias de Mineros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+<div class="max-w-5xl mx-auto bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-2xl font-bold mb-4 text-center">Ganancias de Mineros</h2>
+    <table class="w-full table-auto border border-gray-300 rounded-lg">
+        <thead class="bg-gray-200">
+        <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Minero</th>
+            <th class="px-4 py-2">Bloque</th>
+            <th class="px-4 py-2">Ganancia</th>
+            <th class="px-4 py-2">Fecha</th>
+            <th class="px-4 py-2">Hora</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="g : ${ganancias}" class="text-center border-t">
+            <td th:text="${g.id}" class="px-4 py-2"></td>
+            <td th:text="${g.minero.nombre}" class="px-4 py-2"></td>
+            <td th:text="${g.bloque.id}" class="px-4 py-2"></td>
+            <td th:text="${g.ganancia}" class="px-4 py-2"></td>
+            <td th:text="${g.fecha}" class="px-4 py-2"></td>
+            <td th:text="${g.hora}" class="px-4 py-2"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mt-6 text-center">
+        <a th:href="@{/inicio}" class="text-blue-600 hover:underline">← Volver al inicio</a>
+    </div>
+</div>
+</body>
+</html>

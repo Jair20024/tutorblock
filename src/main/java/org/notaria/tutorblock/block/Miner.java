@@ -7,20 +7,23 @@ public class Miner {
     private double reward;
 
     public void mine(Block block, BlockChain blockChain) {
+        // Generar el hash inicial
+        block.generateHash();
 
         while (notGoldenHash(block)) {
-            // generación del hash de bloque
-            block.generateHash();
             block.incrementNonce();
+            block.generateHash(); // volver a generar el hash con el nuevo nonce
         }
 
         System.out.println(block + " ha sido minado...");
         System.out.println("Hash es: " + block.getHash());
-        // añadir el bloque a la cadena de bloques
-        blockChain.addBlock(block);
-        // cálculo de la recompensa
-        reward += Contants.MINER_REWARD;
 
+        // Añadir el bloque a la cadena si se usa (puede ser null)
+        if (blockChain != null) {
+            blockChain.addBlock(block);
+        }
+
+        reward += Contants.MINER_REWARD;
     }
 
     // Así que los mineros generarán valores hash hasta que encuentren el hash correcto.
